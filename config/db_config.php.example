@@ -1,0 +1,10 @@
+<?php
+
+//set extension=mysqli.so in php.ini
+
+DEFINE('DB_USER', 'test');
+DEFINE('DB_PASSWORD', 'secret42');
+DEFINE('DB_HOST', 'localhost');
+DEFINE('DB_NAME', 'test');
+
+?>

@@ -1,0 +1,1 @@
+Layout<?php require $this->current_view; ?>

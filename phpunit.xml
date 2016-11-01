@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true">
+	<testsuite name="Umfrage">
+		<directory>./test/controllers</directory>
+		<directory>./test/models</directory>
+		<directory>./test/libs</directory>
+	</testsuite>
+        <filter>
+            <whitelist processUncoveredFilesFromWhitelist="true">
+              <directory>./controllers</directory>
+              <directory>./libs</directory>
+              <directory>./models</directory>
+            </whitelist>
+        </filter>
+</phpunit>

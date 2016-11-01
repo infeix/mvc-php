@@ -1,0 +1,51 @@
+
+.form-questions {
+  max-width: 900px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.form-group{
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 3px;
+    background-color: white;
+}
+
+.tabbed {
+    margin: 0px 0px 0px 40px;
+}
+
+.warning {
+    border: 1px solid red;
+    padding: 3px;
+    border-radius: 3px;
+}
+
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+ol.sortable-answers li {
+    border: solid 1px #ccc;
+    border-radius: 3px;
+    padding: 3px 3px 0px 4px;
+    margin: 2px;
+}
+
+ol.sortable-answers li.placeholder {
+  position: relative;
+    border: solid 1px;
+    border-radius: 3px;
+    margin: 1px;
+}
+ol.sortable-answers li.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
+}
