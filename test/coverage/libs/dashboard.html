@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /home/jo/NetBeansProjects/Umfrage/libs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/nv.d3.min.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="../js/html5shiv.min.js"></script>
+  <script src="../js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="../index.html">/home/jo/NetBeansProjects/Umfrage</a></li>
+        <li><a href="index.html">libs</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Session.php.html#3">Session</a></td><td class="text-right">78%</td></tr>
+       <tr><td><a href="Scope.php.html#6">Scope</a></td><td class="text-right">83%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Scope.php.html#6">Scope</a></td><td class="text-right">77</td></tr>
+       <tr><td><a href="Session.php.html#3">Session</a></td><td class="text-right">19</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Scope.php.html#163"><abbr title="Scope::none">none</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Session.php.html#54"><abbr title="Session::pop">pop</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Scope.php.html#95"><abbr title="Scope::join">join</abbr></a></td><td class="text-right">33%</td></tr>
+       <tr><td><a href="Scope.php.html#203"><abbr title="Scope::first">first</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Router.php.html#5"><abbr title="Router::__construct">__construct</abbr></a></td><td class="text-right">78%</td></tr>
+       <tr><td><a href="Filter.php.html#11"><abbr title="Filter::get">get</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Scope.php.html#57"><abbr title="Scope::where_in">where_in</abbr></a></td><td class="text-right">83%</td></tr>
+       <tr><td><a href="Scope.php.html#181"><abbr title="Scope::find">find</abbr></a></td><td class="text-right">83%</td></tr>
+       <tr><td><a href="Model.php.html#72"><abbr title="Model::delete">delete</abbr></a></td><td class="text-right">86%</td></tr>
+       <tr><td><a href="Factory.php.html#39"><abbr title="Factory::create">create</abbr></a></td><td class="text-right">88%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Session.php.html#54"><abbr title="Session::pop">pop</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Scope.php.html#95"><abbr title="Scope::join">join</abbr></a></td><td class="text-right">16</td></tr>
+       <tr><td><a href="Scope.php.html#57"><abbr title="Scope::where_in">where_in</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Router.php.html#5"><abbr title="Router::__construct">__construct</abbr></a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="Model.php.html#72"><abbr title="Model::delete">delete</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="Factory.php.html#39"><abbr title="Factory::create">create</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="Filter.php.html#11"><abbr title="Filter::get">get</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="Scope.php.html#203"><abbr title="Scope::first">first</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Scope.php.html#181"><abbr title="Scope::find">find</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 4.0.1</a> using <a href="https://secure.php.net/" target="_top">PHP 7.0.8-0ubuntu0.16.04.3</a> with <a href="https://xdebug.org/">Xdebug 2.4.0</a> and <a href="https://phpunit.de/">PHPUnit 5.6.2</a> at Thu Nov 3 16:28:17 CET 2016.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../js/jquery.min.js" type="text/javascript"></script>
+  <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../js/holder.min.js" type="text/javascript"></script>
+  <script src="../js/d3.min.js" type="text/javascript"></script>
+  <script src="../js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,1,1,4,5], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([2,0,0,0,1,0,0,1,1,5,3,76], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[100,16,"<a href=\"Controller.php.html#3\">Controller<\/a>"],[100,9,"<a href=\"DatabaseConnection.php.html#3\">DatabaseConnection<\/a>"],[100,10,"<a href=\"DatabaseSetup.php.html#2\">DatabaseSetup<\/a>"],[95.238095238095,17,"<a href=\"Factory.php.html#30\">Factory<\/a>"],[90,6,"<a href=\"Filter.php.html#3\">Filter<\/a>"],[96.116504854369,55,"<a href=\"Model.php.html#3\">Model<\/a>"],[91.891891891892,14,"<a href=\"Router.php.html#3\">Router<\/a>"],[83.687943262411,61,"<a href=\"Scope.php.html#6\">Scope<\/a>"],[78.378378378378,17,"<a href=\"Session.php.html#3\">Session<\/a>"],[100,16,"<a href=\"View.php.html#3\">View<\/a>"],[100,12,"<a href=\"i18n.php.html#3\">i18n<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"Controller.php.html#5\">Controller::__construct<\/a>"],[100,1,"<a href=\"Controller.php.html#12\">Controller::set_resource<\/a>"],[100,2,"<a href=\"Controller.php.html#19\">Controller::add_to_resource<\/a>"],[100,2,"<a href=\"Controller.php.html#30\">Controller::get_resource<\/a>"],[100,2,"<a href=\"Controller.php.html#39\">Controller::get_param<\/a>"],[100,1,"<a href=\"Controller.php.html#48\">Controller::render<\/a>"],[100,3,"<a href=\"Controller.php.html#53\">Controller::redirect_to<\/a>"],[100,1,"<a href=\"Controller.php.html#62\">Controller::show_msg<\/a>"],[100,3,"<a href=\"Controller.php.html#67\">Controller::add_params<\/a>"],[100,3,"<a href=\"DatabaseConnection.php.html#7\">DatabaseConnection::get_connection<\/a>"],[100,2,"<a href=\"DatabaseConnection.php.html#18\">DatabaseConnection::send_query<\/a>"],[100,1,"<a href=\"DatabaseConnection.php.html#27\">DatabaseConnection::inserted_id<\/a>"],[100,1,"<a href=\"DatabaseConnection.php.html#32\">DatabaseConnection::check_str<\/a>"],[100,1,"<a href=\"DatabaseConnection.php.html#37\">DatabaseConnection::close_connection<\/a>"],[100,1,"<a href=\"DatabaseConnection.php.html#44\">DatabaseConnection::error<\/a>"],[100,1,"<a href=\"DatabaseSetup.php.html#4\">DatabaseSetup::__construct<\/a>"],[100,1,"<a href=\"DatabaseSetup.php.html#7\">DatabaseSetup::clean<\/a>"],[100,4,"<a href=\"DatabaseSetup.php.html#19\">DatabaseSetup::up<\/a>"],[100,4,"<a href=\"DatabaseSetup.php.html#35\">DatabaseSetup::down<\/a>"],[100,1,"<a href=\"Factory.php.html#32\">Factory::__construct<\/a>"],[88.888888888889,4,"<a href=\"Factory.php.html#39\">Factory::create<\/a>"],[100,1,"<a href=\"Factory.php.html#66\">Factory::build<\/a>"],[100,3,"<a href=\"Factory.php.html#71\">Factory::create_all<\/a>"],[100,2,"<a href=\"Factory.php.html#83\">Factory::generate_random_string<\/a>"],[100,1,"<a href=\"Factory.php.html#93\">Factory::generate_random_mail<\/a>"],[100,1,"<a href=\"Factory.php.html#97\">Factory::clean_database<\/a>"],[100,1,"<a href=\"Factory.php.html#101\">Factory::get_one_of<\/a>"],[100,1,"<a href=\"Factory.php.html#106\">Factory::generate_random_number<\/a>"],[100,2,"<a href=\"Factory.php.html#111\">Factory::delete_all_of<\/a>"],[100,1,"<a href=\"Filter.php.html#7\">Filter::__construct<\/a>"],[80,3,"<a href=\"Filter.php.html#11\">Filter::get<\/a>"],[100,2,"<a href=\"Filter.php.html#23\">Filter::validate_string<\/a>"],[100,1,"<a href=\"Model.php.html#5\">Model::__construct<\/a>"],[100,1,"<a href=\"Model.php.html#11\">Model::scope<\/a>"],[100,2,"<a href=\"Model.php.html#16\">Model::get_scope<\/a>"],[96.296296296296,13,"<a href=\"Model.php.html#24\">Model::save<\/a>"],[86.666666666667,4,"<a href=\"Model.php.html#72\">Model::delete<\/a>"],[100,2,"<a href=\"Model.php.html#97\">Model::has_manny_of<\/a>"],[91.666666666667,9,"<a href=\"Model.php.html#110\">Model::write_properties<\/a>"],[100,7,"<a href=\"Model.php.html#139\">Model::validate_existence<\/a>"],[100,2,"<a href=\"Model.php.html#154\">Model::get_pk_value<\/a>"],[100,1,"<a href=\"Model.php.html#164\">Model::set_pk_value<\/a>"],[100,1,"<a href=\"Model.php.html#170\">Model::got_pk<\/a>"],[100,1,"<a href=\"Model.php.html#176\">Model::get_pk<\/a>"],[100,6,"<a href=\"Model.php.html#181\">Model::to_fk<\/a>"],[100,5,"<a href=\"Model.php.html#201\">Model::get_parent<\/a>"],[78.571428571429,5,"<a href=\"Router.php.html#5\">Router::__construct<\/a>"],[100,1,"<a href=\"Router.php.html#37\">Router::execute_controller<\/a>"],[100,1,"<a href=\"Router.php.html#42\">Router::show_error<\/a>"],[100,1,"<a href=\"Router.php.html#49\">Router::controller_not_found<\/a>"],[100,3,"<a href=\"Router.php.html#54\">Router::generate_controller_array<\/a>"],[100,3,"<a href=\"Router.php.html#62\">Router::set_controller<\/a>"],[100,1,"<a href=\"Scope.php.html#12\">Scope::model<\/a>"],[100,1,"<a href=\"Scope.php.html#16\">Scope::__construct<\/a>"],[100,6,"<a href=\"Scope.php.html#21\">Scope::where<\/a>"],[83.333333333333,6,"<a href=\"Scope.php.html#57\">Scope::where_in<\/a>"],[100,4,"<a href=\"Scope.php.html#80\">Scope::select_elements_with<\/a>"],[33.333333333333,6,"<a href=\"Scope.php.html#95\">Scope::join<\/a>"],[100,2,"<a href=\"Scope.php.html#132\">Scope::query<\/a>"],[92.307692307692,5,"<a href=\"Scope.php.html#141\">Scope::reload<\/a>"],[0,1,"<a href=\"Scope.php.html#163\">Scope::none<\/a>"],[100,3,"<a href=\"Scope.php.html#169\">Scope::find_by<\/a>"],[83.333333333333,2,"<a href=\"Scope.php.html#181\">Scope::find<\/a>"],[100,2,"<a href=\"Scope.php.html#193\">Scope::exists<\/a>"],[66.666666666667,2,"<a href=\"Scope.php.html#203\">Scope::first<\/a>"],[100,1,"<a href=\"Scope.php.html#214\">Scope::all<\/a>"],[100,2,"<a href=\"Scope.php.html#220\">Scope::array_of_<\/a>"],[100,2,"<a href=\"Scope.php.html#231\">Scope::scope_of_its<\/a>"],[100,4,"<a href=\"Scope.php.html#255\">Scope::has_manny_of<\/a>"],[100,2,"<a href=\"Scope.php.html#280\">Scope::is_queried<\/a>"],[100,6,"<a href=\"Scope.php.html#285\">Scope::build_query<\/a>"],[100,3,"<a href=\"Scope.php.html#312\">Scope::has_element_properties<\/a>"],[100,3,"<a href=\"Session.php.html#8\">Session::init<\/a>"],[100,2,"<a href=\"Session.php.html#25\">Session::add<\/a>"],[100,1,"<a href=\"Session.php.html#35\">Session::set<\/a>"],[100,4,"<a href=\"Session.php.html#41\">Session::get<\/a>"],[0,4,"<a href=\"Session.php.html#54\">Session::pop<\/a>"],[100,2,"<a href=\"Session.php.html#70\">Session::has<\/a>"],[100,1,"<a href=\"Session.php.html#79\">Session::remove<\/a>"],[100,1,"<a href=\"View.php.html#5\">View::__construct<\/a>"],[100,2,"<a href=\"View.php.html#10\">View::set_layout<\/a>"],[100,2,"<a href=\"View.php.html#24\">View::set_view<\/a>"],[100,3,"<a href=\"View.php.html#38\">View::layout<\/a>"],[100,3,"<a href=\"View.php.html#47\">View::view<\/a>"],[100,3,"<a href=\"View.php.html#57\">View::render_view_with_layout<\/a>"],[100,2,"<a href=\"View.php.html#72\">View::render<\/a>"],[100,6,"<a href=\"i18n.php.html#8\">i18n::get<\/a>"],[100,2,"<a href=\"i18n.php.html#39\">i18n::lang<\/a>"],[100,4,"<a href=\"i18n.php.html#48\">i18n::lang_to_session<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

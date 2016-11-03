@@ -8,18 +8,18 @@ class UserController extends Controller {
 
     public function login()
     {
-        if(!$this->power->got_user())
+        unset($_SESSION['current_user']);
+        unset($this->power->current_user);
+
+        $user_scope = User::scope()->where(array('Email' => $this->get_param('Email'), 'Password' => $this->get_param('Password')));
+        if($user_scope->exists())
         {
-            $user_scope = User::scope()->where(array('Email' => $this->get_param('Email'), 'Password' => $this->get_param('Password')));
-            if($user_scope->exists())
-            {
-                $user = $user_scope->first();
-                $this->power->set_user($user);
-            }
-            else {
-                $this->show_msg(i18n::get("authentication_failed"));
-                return $this->redirect_to('Welcome');
-            }
+            $user = $user_scope->first();
+            $this->power->set_user($user);
+        }
+        else {
+            $this->show_msg(i18n::get("authentication_failed"));
+            return $this->redirect_to('Welcome');
         }
         
         if($this->power->questions_for_creating_a_result())

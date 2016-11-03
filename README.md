@@ -9,7 +9,7 @@ Ontop there are some controllers, views and examplethings so you see how it work
 
 ### configuration
 * uncomment `extension=mysqli.so` in the php.ini
-* to use the `.htaccess` file you need to allow `AllowOverride All`
+* to use the `.htaccess` file you need to add `AllowOverride All` in your apache config for your application path.
 * in the file `config/db/db_config.php` you need to put your mysql configuration. (like in the example file) 
 * the example database schema and example seed data you can add with calling the path `/reset/index/secret42`
 
