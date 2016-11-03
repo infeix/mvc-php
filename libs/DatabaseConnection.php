@@ -21,6 +21,7 @@ class DatabaseConnection {
         {
             return mysqli_query($this->get_connection(), $query);            
         }
+        throw new Exception("Empty query exception.");
     }
     
     public function inserted_id()

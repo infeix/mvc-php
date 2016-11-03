@@ -38,7 +38,7 @@ class ScopeTest extends TestCase {
                                         array("user" => $this->user,
                                               "answer" => $this->answer));
         // check conditions
-        $this->assertEquals(3, count($this->scope->all()));
+        $this->assertEquals(3, count(Result::scope()->all()));
         // prepare new scope
         $this->scope = new Scope('Result');
         

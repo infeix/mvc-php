@@ -138,13 +138,13 @@ class ControllerTest extends TestCase {
         $result = $controller->show_msg('test_string4');        
         // check
         $this->assertTrue(isset($result->view->resource['msg']));
-        $this->assertEquals('test_string4', $result->view->resource['msg']);
-        $this->assertEquals('test_string4', Session::get('msg'));
+        $this->assertEquals('test_string4<br/>', $result->view->resource['msg']);
+        $this->assertEquals('test_string4<br/>', Session::get('msg'));
         // act again
         $controller->show_msg('test_string6'); 
         // check
-        $this->assertEquals('test_string4test_string6', $result->view->resource['msg']);
-        $this->assertEquals('test_string4test_string6', Session::get('msg'));
+        $this->assertEquals('test_string4<br/>test_string6<br/>', $result->view->resource['msg']);
+        $this->assertEquals('test_string4<br/>test_string6<br/>', Session::get('msg'));
     }
     
     

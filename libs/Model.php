@@ -12,12 +12,20 @@ class Model extends DatabaseConnection {
     {
         return new Scope(get_called_class());
     }
+        
+    function get_scope($model) {
+        $scope = strtolower($model).'_scope';
+        if(!isset($this->$scope)){
+            $this->has_manny_of($model);
+        }
+        return $this;
+    }
     
     function save($force = false) 
     {
         if($this->got_pk())
         {
-            throw new Exception($ex);
+            //TODO update function needed
         }
         if(method_exists($this, "validate"))
         {
@@ -42,6 +50,10 @@ class Model extends DatabaseConnection {
             }
             $cols = empty($cols) ? "`{$key}`" : "{$cols},`{$key}`";
             $vals = empty($vals) ? $value : $vals . "," . $value;            
+        }
+        if($cols == '' || $vals == '')
+        {
+            throw new Exception("Empty object cannot be saved.");
         }
         $cls = get_called_class();
         $this->send_query("INSERT INTO `{$cls}DB` ({$cols}) VALUES({$vals});");
@@ -82,14 +94,6 @@ class Model extends DatabaseConnection {
         return;
     }
     
-    function create_and_save($properties = array())
-    {
-        $cls = get_called_class();
-        $result = new $cls($properties);
-        $result->save();
-        return $result;
-    }
-    
     function has_manny_of($model, $fk = '', $pk = 'id') 
     {
         if(empty($fk))
@@ -106,12 +110,22 @@ class Model extends DatabaseConnection {
     function write_properties($properties = [], $priority = true) {
         foreach($properties as $key => $value)
         {
+            if(is_int($key))
+            {
+                throw new InvalidArgumentException('Function: write_properties(), Argument: $properties');
+            }
             $old_key = $key;
-            $key = Model::to_fk($value, $key);
-            $value = Model::get_pk_value($value);
+            if(is_a($value, "Model"))
+            {
+                $old_key = $key.'_id';
+            }
+            else 
+            {
+                $old_key = str_replace('_id', '', $key);
+            }
             
-            if($priority === true || !isset($this->$key))
-            {              
+            if($priority === true || !(isset($this->$key) && isset($this->$old_key)))
+            {                    
                 $this->$key = $value;
                 if($old_key != $key && isset($this->$old_key))
                 {
@@ -125,15 +139,16 @@ class Model extends DatabaseConnection {
     function validate_existence($property) {
         if(!isset($this->$property) || $this->$property == '' || $this->$property == NULL)
         {
-            $property = $property.'_id';
-            if(!isset($this->$property) || $this->$property == '' || $this->$property == NULL)
+            $property_id = $property.'_id';
+            if(!isset($this->$property_id) || $this->$property_id == '' || $this->$property_id == NULL)
             {
                 $model = get_class($this);
-                Session::add('msg', i18n::get('.property_missing.{:property:}', 
-                                         array('property' => i18n::get("Model.{$model}.{$property}"))));
+                Session::add('msg', i18n::get('property_missing', 
+                                         array('property' => "{$model}.{$property}")));
                 throw new Exception("Not valid.");
             }
         }
+        return true;
     }
     
     static function get_pk_value($model) 
@@ -171,24 +186,16 @@ class Model extends DatabaseConnection {
         if(is_string($argument))
         {
             $model_cls =  ucfirst($argument);
-            if(class_exists($model_cls))
+            if(class_exists($model_cls) && is_a(new $model_cls(), "Model"))
             {
-                $model = new $model_cls();
-                if(is_a($model, "Model"))
-                {
-                    return $argument.'_id';
-                }            
+                return $argument.'_id';
             }
         }
-        if($alternativ != NULL)
+        if($alternativ !== NULL)
         {
             return $alternativ;
         }
-        if(is_string($argument))
-        {
-            return $argument;
-        }
-        throw new Exception("Wrong use of Model::to_fk().");
+        return $argument;
     }
     
     function get_parent($parent_model) {
@@ -200,22 +207,14 @@ class Model extends DatabaseConnection {
         elseif(isset($this->{$parent_model.'_id'}))
         {
             $parent_model_class = ucfirst($parent_model);
-            return $parent_model_class::scope()->find($this->{$parent_model.'_id'});
+            $scope = $parent_model_class::scope()->find($this->{$parent_model.'_id'}, true);
+            if($scope->exists())
+            {
+                $this->$parent_model = $scope->first();
+                unset($this->{$parent_model.'_id'});
+                return $this->$parent_model;
+            }
         }
-        throw new Exception("No such parent.");
-    }
-    
-    
-    function get_parent_pk($parent_model) {
-        $fk = $parent_model.'_id';
-        if(isset($this->$parent_model) && is_a($this->$parent_model, "Model"))
-        {
-            return Model::get_pk_value($this->$parent_model);
-        }
-        elseif(isset($this->$fk))
-        {
-            return $this->$fk;
-        }
-        return NULL;
+        throw new Exception("No such parent Exception.");
     }
 }

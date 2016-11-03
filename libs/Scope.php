@@ -21,7 +21,7 @@ class Scope extends DatabaseConnection {
     public function where($query_array) {
         if($this->is_queried())
         {
-            return $this->select($query_array);
+            return $this->select_elements_with($query_array);
         }
         if(is_array($query_array))
         {
@@ -77,13 +77,13 @@ class Scope extends DatabaseConnection {
         return $this->none();
     }
     
-    public function select($query_array) 
+    public function select_elements_with($properties) 
     {
-        if(is_array($query_array))
+        if(is_array($properties))
         {
             foreach($this->elements as $key => $element)
             {
-                if(!Scope::is_element_in_query($query_array, $element))
+                if(!Scope::has_element_properties($element, $properties))
                 {
                     unset($this->elements[$key]);
                 }
@@ -119,8 +119,8 @@ class Scope extends DatabaseConnection {
             }
             $table_a = $this->check_str($part_a[0]);
             $table_b = $this->check_str($part_b[0]);
-            $col_a = $this->check_str(Model::to_fk($part_a[1]));
-            $col_b = $this->check_str(Model::to_fk($part_b[1]));
+            $col_a = $this->check_str(Model::to_fk($part_a[1],$part_a[1]));
+            $col_b = $this->check_str(Model::to_fk($part_b[1],$part_b[1]));
             $this->join_statement = $this->join_statement . " " . $kind . " JOIN `" . $model . "DB`"
                                                           . " ON `" . $table_a . "DB`.`" . $col_a . "`"
                                                           . " = `" . $table_b . "DB`.`" . $col_b . "`";
@@ -178,11 +178,15 @@ class Scope extends DatabaseConnection {
         return $this->where($properties)->first();
     }
         
-    public function find($value)
+    public function find($value, $scope = false)
     {
         $model = $this->model();
         $pk = $model::get_pk();
         $properties = array($pk => $value);
+        if($scope)
+        {
+            return $this->where($properties);
+        }
         return $this->where($properties)->first();
     }
     
@@ -305,10 +309,10 @@ class Scope extends DatabaseConnection {
     //static
     //=======
     
-    static function is_element_in_query($query_array, $element)
+    static function has_element_properties($element, $properties)
     {
         $fine_element = true;
-        foreach($query_array as $property => $search_value)
+        foreach($properties as $property => $search_value)
         {
             $value = Model::get_pk_value($search_value);
             $fk = Model::to_fk($search_value, $property);

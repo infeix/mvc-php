@@ -15,12 +15,11 @@ class ModelTest extends TestCase {
         {
             $answer->delete();
         }
-        
+        $this->test_mail = Factory::generate_random_mail();
+        $this->test_name = Factory::generate_random_string();
         $this->user = Factory::create("User", 
-                                      array('Firstname' => "some name", 
-                                            "CID" => 1337));        
-//        $this->user->Firstname = "some name";
-//        $this->user->CID = 1337;
+                                      array('Firstname' => $this->test_name, 
+                                            "Email" => $this->test_mail));      
         
         $this->finished = new Finished();
         $this->answer = new Answer();
@@ -29,7 +28,7 @@ class ModelTest extends TestCase {
     
     public function test_get_pk_value() {
         $property = array("Firstname" => "Peter");
-        $this->assertEquals(1337, Model::get_pk_value($this->user));
+        $this->assertEquals($this->test_mail, $this->user->Email);
         
         $this->user2 = Factory::create("User", $property);
         $this->user2_ = User::scope()->find_by($property);
@@ -40,6 +39,7 @@ class ModelTest extends TestCase {
     
     
     public function test_write_object_property() {
+        $this->finished->user_id = 12;
         $model_property = array("user" => $this->user);
         $factory_property = array("user" => $this->user_factory);
         
@@ -51,20 +51,20 @@ class ModelTest extends TestCase {
         
         $this->finished->write_properties($model_property);
         
-        $this->assertFalse(isset($this->finished->user));
-        $this->assertEquals($this->finished->user_id, $this->user->CID);
+        $this->assertTrue(isset($this->finished->user));
+        $this->assertEquals($this->user, $this->finished->user);
         
     }
     
     public function test_write_properties() {
-        $properties = array("CID" => 42, "Firstname" => "Peter");
+        $properties = array("Email" => "info@ultra.de", "Firstname" => "Peter");
         
-        $this->assertEquals(1337, Model::get_pk_value($this->user));
-        $this->assertEquals("some name", $this->user->Firstname);
+        $this->assertEquals($this->test_mail, $this->user->Email);
+        $this->assertEquals($this->test_name, $this->user->Firstname);
         
         $this->user->write_properties($properties);
         
-        $this->assertEquals(42, Model::get_pk_value($this->user));
+        $this->assertEquals("info@ultra.de", $this->user->Email);
         $this->assertEquals("Peter", $this->user->Firstname);
         
     }
@@ -100,46 +100,79 @@ class ModelTest extends TestCase {
     }
     
     
-    public function test_get_parent_pk() {
+    public function test_save_scope() {
         // prepare
-        $this->question = new Question();
-        $this->question->input_type = 'checkbox';
-        $this->question->multi_select = 1;
-        $this->question->sort_index = 12;
-        $this->question->save();
-        $this->assertTrue(isset($this->question->id));
+        $this->question = Factory::create("Question");
         
         $answer_scope = Answer::scope();
         $this->assertEquals(0, count($answer_scope->all()));
         
-        $this->answer = new Answer();
-        $this->answer->question_id = $this->question->id;
-        $this->answer->save();        
-        $this->assertTrue(isset($this->answer->id));        
-        $this->assertEquals(1, count($answer_scope->reload()->all()));
+        $question_scope = Question::scope()->find(Model::get_pk_value($this->question), true);
+        $this->answer->question = $question_scope;
+        $this->setExpectedException(Exception::class);
+        $this->answer->save();
         
-        $this->assertEquals($this->question->id, $this->answer->get_parent_pk('question'));
+        $this->assertEquals(0, count($answer_scope->reload()->all()));
+    }
+    
+    public function test_validate_existence()
+    {
+        $this->question = new Question();
+        $this->setExpectedException(Exception::class);
+        $this->question->validate_existence('sort_index');
+        Session::get('msg', "Fehler beim Speichern. (Question.sort_index fehlt)");
+        
+        $this->question->sort_index = 5;
+        $this->assertTrue($this->question->validate_existence('sort_index'));
+    }
+    
+    public function test_to_fk()
+    {
+        $user_id1 = Model::to_fk(new User());       
+        $this->assertEquals("user_id", $user_id1);
+        $user_id2 = Model::to_fk("user");   
+        $this->assertEquals("user_id", $user_id2);
+        $user_id3 = Model::to_fk("userk");
+        $this->assertEquals("userk", $user_id3);
+        $user_id4 = Model::to_fk(4);
+        $this->assertEquals(4, $user_id4);
+        $user_id5 = Model::to_fk("userk", "somethong else");
+        $this->assertEquals("somethong else", $user_id5);
+    }
+    
+    public function test_get_parent_without_any()
+    {
+        $answer = new Model();
+        $this->setExpectedException(Exception::class);
+        $answer->get_parent("question");
     }
     
     
-    public function test_get_parent_pk2() {
-        // prepare
-        $this->question = new Question();
-        $this->question->input_type = 'checkbox';
-        $this->question->multi_select = 1;
-        $this->question->sort_index = 12;
-        $this->question->save();
-        $this->assertTrue(isset($this->question->id));
+    public function test_get_parent_with_wrong()
+    {
+        $answer = new Model();
+        $answer->question_id = 42;
+        $this->setExpectedException(Exception::class);
+        $answer->get_parent("question");        
+    }
+    
+    public function test_get_parent_with_model()
+    {
+        $question = Factory::create('Question', array('input_type' => 'fancy'));
+        $answer = new Model();
+        $answer->question = $question;
+        $this->assertEquals($question, $answer->get_parent("question"));
+    }
+    
+    public function test_get_parent_with_id()
+    {
+        $question = Factory::create('Question', array('input_type' => 'fancy'));
+        $answer = new Model();
         
-        $answer_scope = Answer::scope();
-        $this->assertEquals(0, count($answer_scope->all()));
-        
-        $this->answer = new Answer();
-        $this->answer->question = $this->question;
-        $this->answer->save();        
-        $this->assertTrue(isset($this->answer->id));        
-        $this->assertEquals(1, count($answer_scope->reload()->all()));
-        
-        $this->assertEquals($this->question->id, $this->answer->get_parent_pk('question'));
+        $answer->question_id = $question->id;
+        $parent = $answer->get_parent("question");
+        $this->assertEquals($question->id, $parent->id);
+        $this->assertEquals($question->input_type, $parent->input_type);
+        $this->assertFalse(isset($answer->question_id));        
     }
 }

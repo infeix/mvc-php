@@ -9,6 +9,7 @@ class RouterTest extends TestCase {
     public function setUp()
     {
         Session::init();
+        Session::set('lang', 'DE');
         $_GET["url"] = '';
     }
     
@@ -36,7 +37,8 @@ class RouterTest extends TestCase {
         $router = new Router();
         
         // check
-        $this->assertEquals("Translation not found for label .{$lower_url}/index.controller_not_found<br/>", Session::get('msg'));
+        $this->assertEquals("Seite \"{$lower_url}/index\" nicht gefunden.<br/>",
+                            Session::get('msg'));
         $this->assertEquals("error/index", $router->controller_url);
         $this->assertEquals("ErrorController", $router->controller_class);
         $this->assertEquals("index", $router->controller_function);
@@ -54,7 +56,7 @@ class RouterTest extends TestCase {
         $router = new Router();
         
         // check
-        $this->assertEquals("Translation not found for label .user/index.controller_not_found<br/>", 
+        $this->assertEquals('Seite "user/index" nicht gefunden.<br/>', 
                             Session::get('msg'));
         $this->assertEquals("error/index", $router->controller_url);
         $this->assertEquals("ErrorController", $router->controller_class);

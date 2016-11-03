@@ -60,7 +60,7 @@ class Controller {
     }
     
     function show_msg($msg) {
-        $this->add_to_resource ('msg', $msg);
+        $this->add_to_resource ('msg', $msg."<br/>");
         return $this;
     }
     

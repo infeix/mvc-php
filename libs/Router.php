@@ -48,7 +48,7 @@ class Router {
     
     public function controller_not_found()
     {
-        $this->show_error(i18n::get('.{:path:}.controller_not_found', array('path' => $this->controller_url)));
+        $this->show_error(i18n::get('controller_not_found', array('path' => $this->controller_url)));
     }
     
     private function generate_controller_array($route)

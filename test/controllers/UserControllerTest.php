@@ -1,8 +1,8 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-require 'load_things.php';
-require 'test/load_things.php';
+require_once 'load_things.php';
+require_once 'test/load_things.php';
 
 class UserControllerTest extends TestCase {
     
@@ -17,7 +17,7 @@ class UserControllerTest extends TestCase {
     /**
      * @runInSeparateProcess
      */
-    public function test_goto_question_when_login_correct_and_no_answers()
+    public function test_login_correct_and_not_finished()
     {
         $_SERVER["HTTP_HOST"] = $this->host;
         $_POST["Email"] = $this->current_user->Email;
@@ -38,7 +38,7 @@ class UserControllerTest extends TestCase {
     /**
      * @runInSeparateProcess
      */
-    public function test_goto_result_when_login_correct_and_resuls()
+    public function test_login_correct_and_finished()
     {
         $_SERVER["HTTP_HOST"] = $this->host;
         
@@ -58,4 +58,53 @@ class UserControllerTest extends TestCase {
         );
     }
     
+    /**
+     * @runInSeparateProcess
+     */
+    public function test_login_not_correct()
+    {
+        Session::set('lang', "DE");
+        $_SERVER["HTTP_HOST"] = $this->host;
+        
+        $this->finished = Factory::create("Finished", array("user" => $this->current_user));
+        $_POST["Email"] = $this->current_user->Email;
+        $_POST["Password"] = "wrong pass";
+        // Arrange
+        $a = new UserController();
+
+        // Act
+        $result = $a->login();
+        
+        // Assert
+        $this->assertEquals("Login fehlgeschlagen überprüfen Sie Ihre Eingabe.<br/>", Session::get('msg'));
+        $this->assertEquals('REDIRECT', $result);
+        $this->assertContains(
+          "Location: http://{$this->host}/Welcome", xdebug_get_headers()
+        );
+    }
+    
+    /**
+     * @runInSeparateProcess
+     */
+    public function test_logout()
+    {
+        Session::set('lang', "DE");
+        $_SESSION['current_user'] = $this->current_user->CID;
+        $_SERVER["HTTP_HOST"] = $this->host;
+        
+        $this->finished = Factory::create("Finished", array("user" => $this->current_user));
+        $_POST["Email"] = $this->current_user->Email;
+        $_POST["Password"] = "wrong pass";
+        // Arrange
+        $a = new UserController();
+        $this->assertTrue($a->power->got_user());
+        // Act
+        $result = $a->logout();
+        $this->assertFalse(isset($_SESSION['current_user']));
+        // Assert
+        $this->assertEquals('REDIRECT', $result);
+        $this->assertContains(
+          "Location: http://{$this->host}/Welcome", xdebug_get_headers()
+        );
+    }
 }

@@ -63,36 +63,68 @@ class PowerTest extends TestCase {
     }
     
     
-    public function test_questions_no_result()
+    public function test_questions_for_showing_results_not_finished()
     {
         // Act
         $a = new Power();
 
         // no user set
-        $this->assertFalse($a->Questions());
+        $this->assertFalse($a->questions_for_showing_results());
         
         $a->set_user($this->current_user);
         
         // now user is set
         $this->assertTrue($a->got_user());
-        $this->assertEquals("Scope", get_class($a->Questions()));
+        $this->assertFalse($a->questions_for_showing_results());
     }
     
     
-    public function test_questions_result_present()
+    public function test_questions_for_showing_results_finished()
     {
         $this->finished = Factory::create("Finished", array("user" => $this->current_user));
         // Act
         $a = new Power();
 
         // no user set
-        $this->assertFalse($a->Questions());
+        $this->assertFalse($a->questions_for_showing_results());
         
         $a->set_user($this->current_user);
         
         // now user is set
         $this->assertTrue($a->got_user());
-        $this->assertFalse($a->Questions());
+        $this->assertEquals("Scope", get_class($a->questions_for_showing_results()));
+    }
+    
+    public function test_questions_for_creating_a_result_not_finished()
+    {
+        // Act
+        $a = new Power();
+
+        // no user set
+        $this->assertFalse($a->questions_for_creating_a_result());
+        
+        $a->set_user($this->current_user);
+        
+        // now user is set
+        $this->assertTrue($a->got_user());
+        $this->assertEquals("Scope", get_class($a->questions_for_creating_a_result()));
+    }
+    
+    
+    public function test_questions_for_creating_a_result_finished()
+    {
+        $this->finished = Factory::create("Finished", array("user" => $this->current_user));
+        // Act
+        $a = new Power();
+
+        // no user set
+        $this->assertFalse($a->questions_for_creating_a_result());
+        
+        $a->set_user($this->current_user);
+        
+        // now user is set
+        $this->assertTrue($a->got_user());
+        $this->assertFalse($a->questions_for_creating_a_result());
     }
     
 }

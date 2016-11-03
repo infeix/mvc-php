@@ -22,13 +22,13 @@ class UserController extends Controller {
             }
         }
         
-        if($this->power->questions_for_showing_results())
-        {
-            return $this->redirect_to('Result');
-        }
-        elseif($this->power->questions_for_creating_a_result())
+        if($this->power->questions_for_creating_a_result())
         {
             return $this->redirect_to('Question');
+        }
+        else
+        {
+            return $this->redirect_to('Result');
         }
     }
     

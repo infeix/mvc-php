@@ -27,7 +27,7 @@
     $fresh_object = Factory::create('User');
  * 
  */
-class Factory {
+class Factory extends Model {
     
     public function __construct($model, $properties = [], $trait = '') {
         $this->creation = new $model();
@@ -56,11 +56,10 @@ class Factory {
         $factory->creation->write_properties($factory->default_properties);
         $factory->creation->write_properties($properties);
         $factory->creation = Factory::create_all($factory->creation);
-        
         if(method_exists($factory, 'after_factories_build')){
             $factory->after_factories_build();
         }
-        $factory->creation->save();
+        $factory->creation->save(true);
         return $factory->creation;
     }
     
@@ -104,8 +103,16 @@ class Factory {
         return $values[rand(0, count($values)-1)];
     }
     
-    static function generate_random_number($min = NULL, $max = NULL)
+    static function generate_random_number($min = 1, $max = 9999)
     {
         return rand($min, $max);
-    }    
+    }  
+    
+    static function delete_all_of($model)
+    {
+        foreach($model::scope()->all() as $value)
+        {
+            $value->delete();
+        }
+    }  
 }
